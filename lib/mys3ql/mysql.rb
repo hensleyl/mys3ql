@@ -4,8 +4,9 @@ module Mys3ql
   class Mysql
     include Shell
 
-    def initialize(config)
+    def initialize(config, disable)
       @config = config
+      @disable = disable
     end
 
     #
@@ -51,7 +52,8 @@ module Mys3ql
     #
 
     def restore(file)
-      run "gunzip -c #{file} | #{@config.bin_path}mysql #{cli_options}"
+      no_binlog = '"SET sql_log_bin=0;"'
+      run "(echo #{@disable ? no_binlog : '""'}; gunzip -c #{file}) | #{@config.bin_path}mysql #{cli_options}"
     end
 
     def apply_bin_log(file)

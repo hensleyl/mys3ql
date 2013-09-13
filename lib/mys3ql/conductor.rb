@@ -6,15 +6,15 @@ require 'mys3ql/s3'
 module Mys3ql
   class Conductor
 
-    def self.run(command, config, debug)
-      conductor = Conductor.new(config)
+    def self.run(command, config, debug, disable)
+      conductor = Conductor.new(config, disable)
       conductor.debug = debug
       conductor.send command
     end
 
-    def initialize(config_file = nil)
+    def initialize(config_file = nil, disable)
       @config = Config.new(config_file)
-      @mysql = Mysql.new @config
+      @mysql = Mysql.new(@config, disable)
       @s3 = S3.new @config
     end
 

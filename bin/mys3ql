@@ -25,11 +25,15 @@ Main do
 
   option 'version', 'v'
 
+  option 'disable-binlog' do
+    description 'disable binlog feature in mysql'
+  end
+
   def run
     if params[:version].given?
       puts "mys3ql v#{Mys3ql::VERSION}"
       exit
     end
-    Mys3ql::Conductor.run params[:command].value, params[:config].value, params[:debug].given?
+    Mys3ql::Conductor.run params[:command].value, params[:config].value, params[:debug].given?, params['disable-binlog'].given?
   end
 end
