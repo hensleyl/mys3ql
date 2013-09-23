@@ -47,6 +47,10 @@ module Mys3ql
       mysql['bin_log']
     end
 
+    def tables
+      mysql['tables']
+    end
+
     #
     # S3
     #

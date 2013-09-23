@@ -18,6 +18,7 @@ module Mys3ql
       cmd += ' --quick --single-transaction --create-options'
       cmd += ' --flush-logs --master-data=2 --delete-master-logs' if binary_logging?
       cmd += cli_options
+      cmd += " #{tables if tables?}"
       cmd += " | gzip > #{dump_file}"
       run cmd
     end
@@ -71,6 +72,14 @@ module Mys3ql
 
     def binary_logging?
       @config.bin_log && @config.bin_log.length > 0
+    end
+
+    def tables?
+      @config.tables && @config.tables.length > 0
+    end
+
+    def tables
+      @config.tables.gsub ',', ' '
     end
 
     def cli_options
