@@ -41,9 +41,10 @@ module Mys3ql
     private
 
     def get(s3_key, local_file_name)
-      s3_file = bucket.files.get s3_key
       File.open(local_file_name, 'wb') do |file|
-        file.write s3_file.body
+        bucket.files.get(s3_key) do |chunk, remaining_bytes, total_bytes|
+          file.write chunk
+        end
       end
       log "s3: pulled #{s3_key} to #{local_file_name}"
     end
