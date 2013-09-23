@@ -45,6 +45,8 @@ Second, create your config file:
       # Path to the binary logs, should match the log_bin option in your my.cnf.
       # Comment out if you are not using mysql binary logging
       bin_log: /var/lib/mysql/binlog/mysql-bin
+      # specific tables to dump on "mys3ql full"
+      tables:
 
     s3:
       # S3 credentials
@@ -88,11 +90,16 @@ Marc-André Cournoyer's [mysql_s3_backup](https://github.com/macournoyer/mysql_s
 
 ## Questions, Problems, Feedback
 
-Please use the GitHub [issue tracker](https://github.com/airblade/mys3ql/issues) or email me.
+Please use the GitHub [issue tracker](https://github.com/connorgreenwell/mys3ql/issues) or email me.
 
 
 ## Intellectual property
+Forked from:
 
 Copyright 2011 Andy Stewart (boss@airbladesoftware.com).
 
 Released under the MIT licence.
+
+Modified by:
+
+Connor Greenwell
