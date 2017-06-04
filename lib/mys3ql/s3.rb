@@ -13,11 +13,11 @@ module Mys3ql
     def store(file, dump = true)
       key = key_for(dump ? :dump : :bin_log, file)
       s3_file = save file, key
-      if dump && s3_file
-        copy_key = key_for :latest
-        s3_file.copy @config.bucket, copy_key
-        log "s3: copied #{key} to #{copy_key}"
-      end
+      #if dump && s3_file
+      #  copy_key = key_for :latest
+      #  s3_file.copy @config.bucket, copy_key
+      #  log "s3: copied #{key} to #{copy_key}"
+      #end
     end
 
     def delete_bin_logs
